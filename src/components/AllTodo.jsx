@@ -26,7 +26,7 @@ export default function AllTodo() {
 	};
 	const handledeleteListClick = (e) => {
 		const tId = e.target.id || e.target.nearestViewportElement.id;
-		setTodoLists((prev) => prev.filter((l) => !l.includes(tId)));
+		setTodoLists((prev) => prev.filter((l) => !l.list.includes(tId)));
 	};
 	const handleCheckedChange = () => {
 		setChecked((prev) => !prev);
