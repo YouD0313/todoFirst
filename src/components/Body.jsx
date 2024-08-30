@@ -4,7 +4,7 @@ import { BsFillTrash3Fill } from 'react-icons/bs';
 
 export default function Body({
 	list,
-	handledeleteListClick,
+	handledeleteListClick: handleDeleteListClick,
 	handleCheckedChange,
 	checked,
 }) {
@@ -15,10 +15,10 @@ export default function Body({
 					<input type='checkbox' name='' id='' onChange={handleCheckedChange} />
 				</div>
 				<div className={styles.text}>
-					<span className={checked && styles.end}>{list}</span>
+					<span className={checked ? styles.end : ''}>{list}</span>
 				</div>
 			</div>
-			<div className={styles.icon} onClick={handledeleteListClick} id={list}>
+			<div className={styles.icon} onClick={handleDeleteListClick} id={list}>
 				<div id={list}>
 					<BsFillTrash3Fill
 						id={list}

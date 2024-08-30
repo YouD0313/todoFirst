@@ -11,17 +11,16 @@ export default function AllTodo() {
 
 	const handleAddSubmit = (e) => {
 		e.preventDefault();
-		e.target[0].value = '';
+		if (!todo || todoLists.includes(todo)) {
+			setTodo('');
+			return;
+		}
+		setTodoLists([...todoLists, todo]);
+		setTodo('');
 	};
-	const handleChange = (e) => {
+	const handleTextChange = (e) => {
 		let keyup = e.target.value;
 		setTodo(keyup);
-	};
-	const stateArrAdd = () => {
-		if (!todo || todoLists.includes(todo)) return;
-		else {
-			setTodoLists([...todoLists, todo]);
-		}
 	};
 	const handledeleteListClick = (e) => {
 		const tId = e.target.id || e.target.nearestViewportElement.id;
@@ -51,9 +50,9 @@ export default function AllTodo() {
 				</div>
 				<div className={styles.footer}>
 					<Search
-						stateArrAdd={stateArrAdd}
+						todo={todo}
 						handleAddSubmit={handleAddSubmit}
-						handleChange={handleChange}
+						handleTextChange={handleTextChange}
 					/>
 				</div>
 			</div>
