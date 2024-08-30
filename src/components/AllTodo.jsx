@@ -5,22 +5,24 @@ import Body from './Body';
 import Search from './Search';
 
 export default function AllTodo() {
-	const [todo, setTodo] = useState('');
+	const [todo, setTodo] = useState({ list: '', key: '' });
 	const [todoLists, setTodoLists] = useState([]);
 	const [checked, setChecked] = useState(false);
 
 	const handleAddSubmit = (e) => {
 		e.preventDefault();
-		if (!todo || todoLists.includes(todo)) {
-			setTodo('');
+		if (!todo) {
+			setTodo({ list: '', key: '' });
 			return;
 		}
 		setTodoLists([...todoLists, todo]);
-		setTodo('');
+		setTodo({ list: '', key: '' });
 	};
+
 	const handleTextChange = (e) => {
-		let keyup = e.target.value;
-		setTodo(keyup);
+		let list = e.target.value;
+		let key = Math.random();
+		setTodo({ list, key });
 	};
 	const handledeleteListClick = (e) => {
 		const tId = e.target.id || e.target.nearestViewportElement.id;
@@ -40,8 +42,8 @@ export default function AllTodo() {
 					{!!todoLists &&
 						todoLists.map((list) => (
 							<Body
-								key={list}
-								list={list}
+								key={list.key}
+								list={list.list}
 								handledeleteListClick={handledeleteListClick}
 								handleCheckedChange={handleCheckedChange}
 								checked={checked}
@@ -50,7 +52,7 @@ export default function AllTodo() {
 				</div>
 				<div className={styles.footer}>
 					<Search
-						todo={todo}
+						todo={todo.list}
 						handleAddSubmit={handleAddSubmit}
 						handleTextChange={handleTextChange}
 					/>
