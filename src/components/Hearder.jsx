@@ -3,11 +3,7 @@ import styles from './Header.module.css';
 import { MdWbSunny } from 'react-icons/md';
 import { FaMoon } from 'react-icons/fa';
 
-export default function Hearder() {
-	const [mode, setMode] = useState(false);
-	const handelModeClick = () => {
-		setMode((prev) => !prev);
-	};
+export default function Hearder({ mode, handelModeClick }) {
 	return (
 		<div className={styles.headers}>
 			<div className={styles.mode}>

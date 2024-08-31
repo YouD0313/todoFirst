@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
 import styles from './Search.module.css';
 
-export default function Search({ handleAddSubmit, handleTextChange, todo }) {
+export default function Search({ handleAddSubmit, handleTextChange, content }) {
 	return (
 		<form className={styles.wrapSearch} action='' onSubmit={handleAddSubmit}>
 			<input
@@ -9,7 +8,7 @@ export default function Search({ handleAddSubmit, handleTextChange, todo }) {
 				type='text'
 				name='todo'
 				id='todo'
-				value={todo}
+				value={content}
 				placeholder='Add Todo'
 				onChange={handleTextChange}
 			/>

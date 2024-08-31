@@ -5,54 +5,73 @@ import Body from './Body';
 import Search from './Search';
 
 export default function AllTodo() {
-	const [todo, setTodo] = useState({ list: '', key: '' });
-	const [todoLists, setTodoLists] = useState([]);
+	const [todo, setTodo] = useState({ content: '', check: false, id: '' });
+	const [list, setList] = useState([]);
+	const [active, setActive] = useState('');
+	const [completed, setCompleted] = useState('');
 	const [checked, setChecked] = useState(false);
 
-	const handleAddSubmit = (e) => {
-		e.preventDefault();
-		if (!todo) {
-			setTodo({ list: '', key: '' });
-			return;
-		}
-		setTodoLists([...todoLists, todo]);
-		setTodo({ list: '', key: '' });
+	const [mode, setMode] = useState(false);
+
+	const handleCheckedChange = (e) => {
+		setList((prev) => ({
+			...prev,
+			i: prev.map((list) => {
+				if (list.content.includes(e.target.id)) {
+					return { ...list, check: true };
+				}
+				return list;
+			}),
+		}));
 	};
 
+	const handelModeClick = () => {
+		setMode((prev) => !prev);
+	};
+	const handleAddSubmit = (e) => {
+		e.preventDefault();
+
+		const checkDuplication = list.findIndex((n) =>
+			n.content.includes(todo.content)
+		);
+		if (!todo.content || checkDuplication > -1) {
+			setTodo({ content: '', check: false, id: '' });
+			return;
+		}
+		setList([...list, todo]);
+		setTodo({ content: '', check: false, id: '' });
+	};
 	const handleTextChange = (e) => {
-		let list = e.target.value;
-		let key = Math.random();
-		setTodo({ list, key });
+		const content = e.target.value;
+		const id = Math.random();
+		setTodo({ ...todo, content, id });
 	};
-	const handledeleteListClick = (e) => {
+	const handleDeleteListClick = (e) => {
 		const tId = e.target.id || e.target.nearestViewportElement.id;
-		setTodoLists((prev) => prev.filter((l) => !l.list.includes(tId)));
-	};
-	const handleCheckedChange = () => {
-		setChecked((prev) => !prev);
+		setList((prev) => prev.filter((l) => !l.content.includes(tId)));
 	};
 
 	return (
 		<div className={styles.whole}>
 			<div className={styles.wrapTodo}>
 				<div className={styles.header}>
-					<Hearder />
+					<Hearder mode={mode} handelModeClick={handelModeClick} />
 				</div>
 				<div className={styles.body}>
-					{!!todoLists &&
-						todoLists.map((list) => (
+					{list.length > 0 &&
+						list.map((list) => (
 							<Body
-								key={list.key}
-								list={list.list}
-								handledeleteListClick={handledeleteListClick}
+								key={list.id}
+								checked={list.check}
+								content={list.content}
+								handleDeleteListClick={handleDeleteListClick}
 								handleCheckedChange={handleCheckedChange}
-								checked={checked}
 							/>
 						))}
 				</div>
 				<div className={styles.footer}>
 					<Search
-						todo={todo.list}
+						content={todo.content}
 						handleAddSubmit={handleAddSubmit}
 						handleTextChange={handleTextChange}
 					/>
