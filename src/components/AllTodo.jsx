@@ -14,15 +14,14 @@ export default function AllTodo() {
 	const [mode, setMode] = useState(false);
 
 	const handleCheckedChange = (e) => {
-		setList((prev) => ({
-			...prev,
-			i: prev.map((list) => {
+		setList((prev) => {
+			prev.map((list) => {
 				if (list.content.includes(e.target.id)) {
 					return { ...list, check: true };
 				}
 				return list;
-			}),
-		}));
+			});
+		});
 	};
 
 	const handelModeClick = () => {
