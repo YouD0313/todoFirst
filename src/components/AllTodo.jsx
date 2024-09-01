@@ -1,113 +1,26 @@
 import React, { useState } from 'react';
 import styles from './AllTodo.module.css';
-import Hearder from './Hearder';
+import Header from './Header';
 import Body from './Body';
 import Search from './Search';
 // import { MdLogin } from 'react-icons/md';
 
 export default function AllTodo() {
-	const [todo, setTodo] = useState({
-		content: '',
-		check: false,
-		id: '',
-	});
-	const [list, setList] = useState([]);
-	const [filter, setFilter] = useState(0);
-
 	const [mode, setMode] = useState(false);
-
-	const handelModeClick = () => {
+	const handleModeClick = () => {
 		setMode((prev) => !prev);
 	};
-	const handleFilterClick = (e) => {
-		const idVal = e.target.id;
-		setFilter(idVal);
-	};
-	const handleAddSubmit = (e) => {
-		e.preventDefault();
-		const checkDuplication = list.findIndex((n) =>
-			n.content.includes(todo.content)
-		);
-		if (!todo.content || checkDuplication > -1) {
-			setTodo({ content: '', check: false, id: '' });
-			return;
-		}
-		setList([...list, todo]);
-		setTodo({ content: '', check: false, id: '' });
-	};
-	const handleTextChange = (e) => {
-		const content = e.target.value;
-		const id = Math.random();
-		setTodo({ ...todo, content, id });
-	};
-	const handleCheckedChange = (e) => {
-		const idVal = e.target.id;
-		setList((prev) => {
-			return prev.map((list) => {
-				if (list.content.includes(idVal)) {
-					return { ...list, check: !list.check };
-				}
-				return list;
-			});
-		});
-	};
-	const handleDeleteListClick = (e) => {
-		const tId = e.target.id || e.target.nearestViewportElement.id;
-		setList((prev) => prev.filter((l) => !l.content.includes(tId)));
-	};
-
 	return (
-		<div className={styles.whole}>
+		<div className={`${styles.whole}`}>
 			<div className={styles.wrapTodo}>
-				<div className={styles.header}>
-					<Hearder
-						mode={mode}
-						handelModeClick={handelModeClick}
-						handleFilterClick={handleFilterClick}
-					/>
+				<div className={`${styles.header}`}>
+					<Header mode={mode} handleModeClick={handleModeClick} />
 				</div>
-				<div className={styles.body}>
-					{list.length > 0 &&
-						list.map((list) => {
-							if (filter == 0) {
-								return (
-									<Body
-										key={list.id}
-										checked={list.check}
-										content={list.content}
-										handleDeleteListClick={handleDeleteListClick}
-										handleCheckedChange={handleCheckedChange}
-									/>
-								);
-							} else if (filter == 1 && list.check === false) {
-								return (
-									<Body
-										key={list.id}
-										checked={list.check}
-										content={list.content}
-										handleDeleteListClick={handleDeleteListClick}
-										handleCheckedChange={handleCheckedChange}
-									/>
-								);
-							} else if (filter == 2 && list.check === true) {
-								return (
-									<Body
-										key={list.id}
-										checked={list.check}
-										content={list.content}
-										handleDeleteListClick={handleDeleteListClick}
-										handleCheckedChange={handleCheckedChange}
-									/>
-								);
-							}
-						})}
+				<div className={`${styles.body}`}>
+					<Body />
 				</div>
-				<div className={styles.footer}>
-					<Search
-						content={todo.content}
-						handleAddSubmit={handleAddSubmit}
-						handleTextChange={handleTextChange}
-					/>
+				<div className={`${styles.footer}`}>
+					<Search />
 				</div>
 			</div>
 		</div>

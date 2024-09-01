@@ -7,10 +7,6 @@
 	align-items: center;
 }
 
-.wrapTodo {
-	/* display: flex; */
-}
-
 .header,
 .body,
 .footer {
@@ -31,4 +27,13 @@
 
 .footer {
 	border-radius: 0 0 10px 10px;
+}
+
+.header_dark,
+.footer_dark {
+	background-color: rgb(243, 243, 243);
+}
+
+.body_dark {
+	background-color: rgb(255, 255, 255);
 }

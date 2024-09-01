@@ -1,16 +1,14 @@
 import styles from './Search.module.css';
 
-export default function Search({ handleAddSubmit, handleTextChange, content }) {
+export default function Search() {
 	return (
-		<form className={styles.wrapSearch} action='' onSubmit={handleAddSubmit}>
+		<form className={styles.wrapSearch} action=''>
 			<input
 				className={styles.search}
 				type='text'
 				name='todo'
 				id='todo'
-				value={content}
 				placeholder='Add Todo'
-				onChange={handleTextChange}
 			/>
 			<button className={styles.add}>Add</button>
 		</form>

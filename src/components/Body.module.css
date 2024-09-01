@@ -20,9 +20,12 @@
 	accent-color: orange;
 }
 
-.text {
+.textDiv {
 	margin-left: 0.3rem;
 	font-size: 1.1rem;
+}
+
+.text {
 	color: white;
 }
 
@@ -31,13 +34,26 @@
 	text-decoration: line-through;
 }
 
-.icon div {
-	cursor: pointer;
+.iconDiv {
+	width: 1.3rem;
+	height: 1.3rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	cursor: pointer;
 	background-color: rgba(179, 179, 190, 0.42);
-	width: 1.3rem;
-	height: 1.3rem;
 	border-radius: 50%;
+}
+
+.trashIcon {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: white;
+	font-size: 0.9rem;
+}
+
+.text_dark,
+.trashIcon_dark {
+	color: #424242;
 }

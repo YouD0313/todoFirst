@@ -15,3 +15,7 @@
 	margin: 0 0.5rem;
 	cursor: pointer;
 }
+
+.borderBottom {
+	border-bottom: 1px solid #91b6ff;
+}
