@@ -3,6 +3,7 @@ import styles from './AllTodo.module.css';
 import Hearder from './Hearder';
 import Body from './Body';
 import Search from './Search';
+import { MdLogin } from 'react-icons/md';
 
 export default function AllTodo() {
 	const [todo, setTodo] = useState({ content: '', check: false, id: '' });
@@ -14,12 +15,12 @@ export default function AllTodo() {
 	const [mode, setMode] = useState(false);
 
 	const handleCheckedChange = (e) => {
+		const idVal = e.target.id;
 		setList((prev) => {
-			prev.map((list) => {
-				if (list.content.includes(e.target.id)) {
+			return prev.map((list) => {
+				if (list.content.includes(idVal)) {
 					return { ...list, check: true };
 				}
-				return list;
 			});
 		});
 	};
