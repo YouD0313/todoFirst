@@ -3,7 +3,7 @@ import styles from './Header.module.css';
 import { MdWbSunny } from 'react-icons/md';
 import { FaMoon } from 'react-icons/fa';
 
-export default function Hearder({ mode, handelModeClick }) {
+export default function Hearder({ mode, handelModeClick, handleFilterClick }) {
 	return (
 		<div className={styles.headers}>
 			<div className={styles.mode}>
@@ -20,9 +20,15 @@ export default function Hearder({ mode, handelModeClick }) {
 				)}
 			</div>
 			<div className={styles.header}>
-				<span>All</span>
-				<span>Active</span>
-				<span>Completed</span>
+				<span id='0' onClick={handleFilterClick}>
+					All
+				</span>
+				<span id='1' onClick={handleFilterClick}>
+					Active
+				</span>
+				<span id='2' onClick={handleFilterClick}>
+					Completed
+				</span>
 			</div>
 		</div>
 	);
