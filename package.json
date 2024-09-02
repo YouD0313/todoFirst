@@ -1,14 +1,24 @@
 {
 	"name": "todo",
-	"private": true,
 	"version": "0.0.0",
-	"type": "module",
+  "private": false,
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index.cjs.js",
+  "module": "./dist/index.es.js",
+  "exports": {
+      ".": {
+          "types": "./dist/index.d.ts",
+          "import": "./dist/index.es.js",
+          "require": "./dist/index.cjs.js"
+      }
+  },
 	"scripts": {
 		"dev": "vite",
-		"build": "yarn vite build",
+		"build": "vite build",
 		"lint": "eslint .",
 		"preview": "vite preview",
-		"deploy": "echo > build/.nojekyll && gh-pages -d build -t true"
+		"deploy": "gh-pages -d build"
 	},
 	"dependencies": {
 		"gh-pages": "^6.1.1",
@@ -17,7 +27,10 @@
 		"react-icons": "^5.3.0"
 	},
 	"eslintConfig": {
-		"extends": "react-app"
+		"extends": [
+			"react-app",
+			"react-app/jest"
+		]
 	},
 	"homepage": "https://youd0313.github.io/todoFirst/",
 	"devDependencies": {
