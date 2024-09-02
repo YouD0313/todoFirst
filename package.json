@@ -1,24 +1,24 @@
 {
 	"name": "todo",
 	"version": "0.0.0",
-  "private": false,
-  "type": "module",
-  "types": "./dist/index.d.ts",
-  "main": "./dist/index.cjs.js",
-  "module": "./dist/index.es.js",
-  "exports": {
-      ".": {
-          "types": "./dist/index.d.ts",
-          "import": "./dist/index.es.js",
-          "require": "./dist/index.cjs.js"
-      }
-  },
+	"private": false,
+	"type": "module",
+	"types": "./dist/index.d.ts",
+	"main": "./dist/index.cjs.js",
+	"module": "./dist/index.es.js",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.es.js",
+			"require": "./dist/index.cjs.js"
+		}
+	},
 	"scripts": {
 		"dev": "vite",
 		"build": "vite build",
 		"lint": "eslint .",
 		"preview": "vite preview",
-		"deploy": "gh-pages -d build"
+		"deploy": "gh-pages -d dist"
 	},
 	"dependencies": {
 		"gh-pages": "^6.1.1",
