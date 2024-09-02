@@ -40,8 +40,6 @@ export default function AllTodo() {
 		setTodo({ ...todo, content, id });
 	};
 	const handleCheckedChange = (e) => {
-		console.log(e);
-
 		const idVal = e.target.id;
 		setList((prev) => {
 			return prev.map((list) => {

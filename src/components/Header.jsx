@@ -22,21 +22,21 @@ export default function Header({
 			</div>
 			<div className={styles.header}>
 				<span
-					className={filter == 0 && styles.borderBottom}
+					className={filter == 0 ? styles.borderBottom : ''}
 					id='0'
 					onClick={handleFilterClick}
 				>
 					All
 				</span>
 				<span
-					className={filter == 1 && styles.borderBottom}
+					className={filter == 1 ? styles.borderBottom : ''}
 					id='1'
 					onClick={handleFilterClick}
 				>
 					Active
 				</span>
 				<span
-					className={filter == 2 && styles.borderBottom}
+					className={filter == 2 ? styles.borderBottom : ''}
 					id='2'
 					onClick={handleFilterClick}
 				>
