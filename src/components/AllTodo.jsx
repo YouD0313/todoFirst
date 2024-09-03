@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './AllTodo.module.css';
 import Header from './Header';
 import Body from './Body';
 import Search from './Search';
-// import { MdLogin } from 'react-icons/md';
+import { MdLogin } from 'react-icons/md';
 
 export default function AllTodo() {
 	const [todo, setTodo] = useState({
@@ -31,6 +31,7 @@ export default function AllTodo() {
 			setTodo({ content: '', check: false, id: '' });
 			return;
 		}
+		localStorage.setItem(todo.content, JSON.stringify({ ...todo }));
 		setList([...list, todo]);
 		setTodo({ content: '', check: false, id: '' });
 	};
@@ -44,6 +45,10 @@ export default function AllTodo() {
 		setList((prev) => {
 			return prev.map((list) => {
 				if (list.content.includes(idVal)) {
+					localStorage.setItem(
+						list.content,
+						JSON.stringify({ ...list, check: !list.check })
+					);
 					return { ...list, check: !list.check };
 				}
 				return list;
@@ -53,7 +58,21 @@ export default function AllTodo() {
 	const handleDeleteListClick = (e) => {
 		const tId = e.target.id || e.target.nearestViewportElement.id;
 		setList((prev) => prev.filter((l) => !l.content.includes(tId)));
+		localStorage.removeItem(tId);
 	};
+
+	useEffect(() => {
+		const length = localStorage.length;
+		if (length > 0) {
+			for (let i = 0; i < length; i++) {
+				const key = localStorage.key(i);
+				const content = JSON.parse(localStorage.getItem(key));
+				setList((prev) => {
+					return [...prev, content];
+				});
+			}
+		}
+	}, []);
 
 	return (
 		<div className={`${styles.whole} ${mode && styles.whole_dark}`}>
